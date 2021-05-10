@@ -1,0 +1,32 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: customingress
+  labels:
+    name: customingress
+spec:
+  rules:
+    - host: example.com
+      http:
+        paths:
+          - pathType: Exact
+            path: "/"
+            backend:
+              service:
+                name: frontend-service
+                port:
+                  number: 5000
+          - pathType: Prefix
+            path: "/ms1"
+            backend:
+              service:
+                name: ms1-service
+                port:
+                  number: 5000
+          - pathType: Prefix
+            path: "/ms2"
+            backend:
+              service:
+                name: ms2-service
+                port:
+                  number: 5000
